@@ -10,6 +10,7 @@ require( __DIR__ . '/base-classes/class-base.php' );
  *
  * @mixin _Sunrise_Fields
  * @mixin _Sunrise_Forms
+ * @mixin _Sunrise_Posts
  * @mixin _Sunrise_Post_Admin_Forms
  * @mixin _Sunrise_Html_Elements
  */
@@ -33,6 +34,7 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/base-classes/class-post-form-base.php' );
     require( __DIR__ . '/base-classes/class-field-base.php' );
 
+    require( __DIR__ . '/helpers/class-posts.php' );
     require( __DIR__ . '/helpers/class-forms.php' );
     require( __DIR__ . '/helpers/class-fields.php' );
     require( __DIR__ . '/helpers/class-html-elements.php' );
@@ -50,9 +52,19 @@ class Sunrise extends Sunrise_Base {
     self::register_field_type( 'textarea',   'Sunrise_Textarea_Field' );
     self::register_field_type( 'url',       'Sunrise_Url_Field' );
 
-    self::add_static_action( 'wp_loaded' );
+    /**
+     * @todo Evaluate if priority 10 is okay or priority 0 is needed for these 'admin_*' hooks.
+     */
+    if ( defined( 'DOING_AJAX' ) ) {
+      self::add_static_action( 'admin_init', 'wp_loaded' );
+    } else if ( is_admin() ) {
+      self::add_static_action( 'admin_menu', 'wp_loaded' );
+    } else {
+      self::add_static_action( 'wp_loaded' );
+    }
 
   }
+
 
   /**
    *
@@ -140,5 +152,35 @@ class Sunrise extends Sunrise_Base {
     return $value;
   }
 
+  /**
+   * Grabs a WP_screen object.
+   *
+   * Tries to get the current one but if it's not available then it hacks it's way to recreate one
+   * because WordPress does not consistently set it, and it's not our place to change it's state.
+   * We just want what we want.
+   *
+   * @return WP_Screen
+   */
+  static function get_screen() {
+    $screen = get_current_screen();
+    if ( empty( $screen ) ) {
+      global $hook_suffix, $page_hook, $plugin_page, $pagenow, $current_screen;
+      if ( empty( $hook_suffix ) ) {
+        $save_hook_suffix = $hook_suffix;
+        $save_current_screen = $current_screen;
+        if ( isset($page_hook) )
+          $hook_suffix = $page_hook;
+        else if ( isset($plugin_page) )
+          $hook_suffix = $plugin_page;
+        else if ( isset($pagenow) )
+          $hook_suffix = $pagenow;
+        set_current_screen();
+        $screen = get_current_screen();
+        $hook_suffix = $save_hook_suffix;
+        $current_screen = $save_current_screen;
+      }
+    }
+    return $screen;
+  }
 }
 Sunrise::on_load();

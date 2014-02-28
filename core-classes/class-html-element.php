@@ -34,8 +34,8 @@ class Sunrise_Html_Element extends Sunrise_Base {
    */
   function __construct( $element_name, $attribute_args = array(), $element_value = null ) {
     $this->element_name = $element_name;
-    $this->element_value = ! $this->is_void_element() ? $element_value : null;
     $this->_attributes = $attribute_args;
+    $this->element_value = $element_value;
   }
 
   /**
@@ -61,9 +61,12 @@ class Sunrise_Html_Element extends Sunrise_Base {
    * @return array
    */
   function attributes_html() {
+    $valid_attributes = Sunrise::get_html_attributes( $this->element_name );
     $html = array();
-    foreach( array_filter( $this->attributes() ) as $name => $value ) {
-      if ( $value && 'name' != $name ) {
+    $attributes = array_filter( $this->attributes() );
+    $attributes['value'] = $this->element_value;
+    foreach( $attributes as $name => $value ) {
+      if ( $value && isset( $valid_attributes[$name] ) ) {
         $html[] = "{$name}=\"{$value}\"";
       }
     }

@@ -35,6 +35,11 @@ class _Sunrise_Forms extends Sunrise_Base {
   private static $_form_index = false;
 
   /**
+   * @var string
+   */
+  private static $_form_mode;
+
+  /**
    *
    */
   static function on_load() {
@@ -167,6 +172,8 @@ class _Sunrise_Forms extends Sunrise_Base {
   /*
    * Returns a mode of 'add', 'edit' or 'ajax' depending on the current mode for this form.
    *
+   * @TODO Integrate/modify/trash this. It is from old Sunrise.
+   *
    * @return bool|string Mode or false if not on a data entry page.
    */
   static function get_form_mode() {
@@ -246,12 +253,6 @@ class _Sunrise_Forms extends Sunrise_Base {
       if ( 'object_type' == $name && ! $value instanceof Sunrise_Object_Classifier ) {
         self::$_temp_object_classifier->assign( $value );
         $value = self::$_temp_object_classifier;
-      } else {
-        $new_name = self::_maybe_prefix_form_arg( $name );
-        if ( $new_name != $name ) {
-          $form_args[$new_name] = $value;
-          unset( $form_args[$name] );
-        }
       }
     }
     return $form_args;

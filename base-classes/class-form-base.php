@@ -38,7 +38,7 @@ class Sunrise_Form_Base extends Sunrise_Base {
   /**
    * @var bool
    */
-  var $form_visible = true;
+  var $form_hidden = false;
 
   /**
    * @var int

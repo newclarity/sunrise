@@ -13,9 +13,41 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
 //    Sunrise::add_static_action( __CLASS__, 'wp_insert_post_data', 2 );
 //    Sunrise::add_static_action( __CLASS__, 'save_post', 2 );
 
-    self::add_static_action( 'add_meta_boxes' );
-    self::add_static_action( 'edit_form_after_title' );
+    self::add_static_action( 'admin_init' );
     Sunrise::register_helper( __CLASS__ );
+  }
+
+  static function _admin_init() {
+    if ( Sunrise::is_post_edit_screen() ) {
+      self::add_static_action( 'add_meta_boxes' );
+      self::add_static_action( 'edit_form_after_title' );
+      self::add_static_action( 'save_post_' . Sunrise::get_screen()->post_type, 'save_post', 3 );
+    }
+  }
+
+  /**
+   * @param int $post_id
+   * @param WP_Post $post
+   * @param bool $update
+   */
+  static function _save_post_3( $post_id, $post, $update ) {
+    $forms = self:: get_post_admin_forms( $post->post_type );
+    if ( count( $forms ) && isset( $_POST['sunrise_fields'] ) && is_array( $POST_fields = $_POST['sunrise_fields'] ) ) {
+      /**
+       * @var Sunrise_Form_Base $form
+       */
+      foreach( $forms as $form_name => $form ) {
+        $form->object_id = $post_id;
+        /**
+         * @var Sunrise_Field_Base $field
+         */
+        foreach( $form->get_fields() as $field_name => $field ) {
+          if ( isset( $POST_fields[$field_name] ) ) {
+            $field->update_value( $POST_fields[$field_name] );
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -46,6 +78,7 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
      * @var Sunrise_Post_Admin_Form $form
      */
     $form = Sunrise::get_post_admin_form( $post->post_type, 'main' );
+    $form->object_id = (int)$post->ID;
     $form->the_form_layout();
   }
 
@@ -60,7 +93,7 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
        * @var Sunrise_Post_Admin_Form $form
        */
       foreach( $forms as $form_name => $form ) {
-        if ( $form->form_visible ) {
+        if ( 'main' != $form_name && ! $form->form_hidden ) {
           $form->add_meta_box();
           //self::set_meta_box_view_state($form->view_state, $metabox_name, $post_type );
         }

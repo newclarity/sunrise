@@ -113,6 +113,9 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
    *
    */
   function field_value() {
+    if ( is_null( $this->_field_value ) ) {
+      $this->_field_value = get_post_meta( $this->object_id(), $this->meta_key(), true );
+    }
     return $this->_field_value;
   }
 
@@ -124,6 +127,13 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
    */
   function filter_html_attributes( $attributes ) {
     return $attributes;
+  }
+
+  /**
+   * @return int
+   */
+  function object_id() {
+    return $this->form->object_id;
   }
 
   /**
@@ -158,7 +168,7 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
    * @return bool|string
    */
   function html_name() {
-    return Sunrise::underscorize( $this->field_name );
+    return 'sunrise_fields[' . Sunrise::underscorize( $this->field_name ) . ']';
   }
 
   /**
@@ -214,6 +224,23 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
    */
   function field_entry_html() {
     return $this->element_html();
+  }
+
+  /**
+   * @param mixed $value
+   */
+  function update_value( $value ) {
+    $this->_field_value = $value;
+    update_post_meta( $this->object_id(), $this->meta_key(), esc_sql( $value ) );
+  }
+
+  /**
+   * Name used for meta_key
+   *
+   * @return string
+   */
+  function meta_key() {
+    return "_sf[{$this->field_name}]";
   }
 
 }
