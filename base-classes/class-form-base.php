@@ -110,14 +110,14 @@ class Sunrise_Form_Base extends Sunrise_Base {
   /**
    * @return string
    */
-  function the_form_layout() {
-    echo $this->form_layout_html();
+  function the_container() {
+    echo $this->container_html();
   }
 
   /**
    * @return string
    */
-  function form_layout_html() {
-    return __( 'Form Layout not defined in child class.', 'sunrise' );
+  function container_html() {
+    return __( 'Form Countainer not defined in child class.', 'sunrise' );
   }
 }

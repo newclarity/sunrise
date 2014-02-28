@@ -79,7 +79,7 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
      */
     $form = Sunrise::get_post_admin_form( $post->post_type, 'main' );
     $form->object_id = (int)$post->ID;
-    $form->the_form_layout();
+    $form->the_container();
   }
 
   /**
@@ -95,7 +95,6 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
       foreach( $forms as $form_name => $form ) {
         if ( 'main' != $form_name && ! $form->form_hidden ) {
           $form->add_meta_box();
-          //self::set_meta_box_view_state($form->view_state, $metabox_name, $post_type );
         }
       }
     }

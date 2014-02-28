@@ -3,18 +3,31 @@
 /**
  * Class Sunrise_Field_Base
  *
- * @property string $layout_class
- * @property string $container_html
  * @property string $html_id
  * @property string $html_type
- * @property string $entry_name
- * @property string $class_html
  * @property string $attributes_html
  */
 
 abstract class Sunrise_Field_Base extends Sunrise_Base {
+
+  /**
+   *
+   */
   const VAR_PREFIX = 'field_';
-  const ENTRY_ELEMENT = 'input';
+
+  /**
+   *
+   */
+  const NO_PREFIX = 'value|parts';
+
+  /**
+   *
+   */
+  const CONTROL_TAG = 'input';
+
+  /**
+   *
+   */
   const HTML_TYPE = 'unspecified';
 
   /**
@@ -70,7 +83,12 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   /**
    * @var null|mixed
    */
-  protected $_field_value = null;
+  protected $_value = null;
+
+  /**
+   * @var array
+   */
+  protected $_parts = false;
 
   /**
    * @param array $field_args
@@ -96,8 +114,9 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
       $attributes['html_id']   = $this->html_id();
       $attributes['html_type'] = $this->html_type();
       $attributes['html_name'] = $this->html_name();
+      $attributes['html_value'] = $this->html_value();
       $attributes = $this->filter_html_attributes( $attributes );
-      $this->_html_element = new Sunrise_Html_Element( $this->entry_element(), $attributes, $this->html_value() );
+      $this->_html_element = new Sunrise_Html_Element( $this->control_tag(), $attributes, $this->value() );
     }
     return $this->_html_element;
   }
@@ -106,17 +125,17 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
    *
    */
   function html_value() {
-    return $this->field_value();
+    return $this->value();
   }
 
   /**
    *
    */
-  function field_value() {
-    if ( is_null( $this->_field_value ) ) {
-      $this->_field_value = get_post_meta( $this->object_id(), $this->meta_key(), true );
+  function value() {
+    if ( is_null( $this->_value ) ) {
+      $this->_value = get_post_meta( $this->object_id(), $this->meta_key(), true );
     }
-    return $this->_field_value;
+    return $this->_value;
   }
 
   /**
@@ -153,15 +172,15 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   /**
    * @return bool|mixed|string
    */
-  function entry_element() {
-    $entry_element = $this->html_type();
-    if ( ! preg_match( '#^(input|select|textarea)$#', $entry_element ) ) {
-      $entry_element = constant( get_class( $this ) . '::ENTRY_ELEMENT' );
-      if ( empty( $entry_element ) ) {
-        $entry_element = 'input';
+  function control_tag() {
+    $control_tag = $this->html_type();
+    if ( ! preg_match( '#^(input|select|textarea)$#', $control_tag ) ) {
+      $control_tag = constant( get_class( $this ) . '::CONTROL_TAG' );
+      if ( empty( $control_tag ) ) {
+        $control_tag = 'input';
       }
     }
-    return $entry_element;
+    return $control_tag;
   }
 
   /**
@@ -186,52 +205,58 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   }
 
   /**
-   * @return bool|string
+   * @return string
    */
-  function label_container_html() {
-    return "<span>{$this->field_label}</span>";
+  function get_parts() {
+    if ( ! $this->_parts ) {
+      $this->_parts = array(
+        'label'   => new Sunrise_Label_Container(),
+        'control' => new Sunrise_Control_Container(),
+        'help'    => new Sunrise_Help_Container(),
+        'message' => new Sunrise_Message_Container(),
+        'infobox' => new Sunrise_Infobox_Container(),
+      );
+      /**
+       * @var Sunrise_Container_Base $container
+       */
+      foreach( $this->_parts as $container ) {
+        $container->owner = $this;
+      }
+    }
+    return $this->_parts;
   }
 
   /**
-   * @return bool|string
+   * @return string
    */
   function container_html() {
-    $element = new Sunrise_Html_Element( 'div', array(
-      'id' => "{$this->html_id}-field-layput-container",
-      'class' => 'field-layput-container',
-      ),
-      $this->field_entry_html()
-    );
-    return $element->element_html();
-  }
-
-  /**
-   * @return string
-   */
-  function field_layout_html() {
-    $label = ! $this->no_label ? $this->label_container_html() : false;
+    $parts = $this->get_parts();
     $element = new Sunrise_Html_Element( 'section', array(
-      'id'     => $this->html_id,
+      'id'    => $this->html_id,
       'class' => 'field-layout'
       ),
-      "{$label}{$this->container_html}<div class=\"clear\"></div>"
+      "{$parts['label']->container_html}{$parts['control']->container_html}<div class=\"clear\"></div>"
     );
     return $element->element_html();
   }
 
   /**
-   * @return string
+   * @param null|mixed $value
    */
-  function field_entry_html() {
-    return $this->element_html();
+  function update_value( $value = null ) {
+    if ( is_null( $value ) ) {
+      $value = $this->_value;
+    } else {
+      $this->set_value( $value );
+    }
+    update_post_meta( $this->object_id(), $this->meta_key(), esc_sql( $value ) );
   }
 
   /**
    * @param mixed $value
    */
-  function update_value( $value ) {
-    $this->_field_value = $value;
-    update_post_meta( $this->object_id(), $this->meta_key(), esc_sql( $value ) );
+  function set_value( $value ) {
+    $this->_value = $value;
   }
 
   /**

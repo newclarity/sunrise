@@ -33,6 +33,13 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/base-classes/class-form-base.php' );
     require( __DIR__ . '/base-classes/class-post-form-base.php' );
     require( __DIR__ . '/base-classes/class-field-base.php' );
+    require( __DIR__ . '/base-classes/class-container-base.php' );
+
+    require( __DIR__ . '/containers/class-control-container.php' );
+    require( __DIR__ . '/containers/class-help-container.php' );
+    require( __DIR__ . '/containers/class-label-container.php' );
+    require( __DIR__ . '/containers/class-message-container.php' );
+    require( __DIR__ . '/containers/class-infobox-container.php' );
 
     require( __DIR__ . '/helpers/class-posts.php' );
     require( __DIR__ . '/helpers/class-forms.php' );
@@ -64,7 +71,6 @@ class Sunrise extends Sunrise_Base {
     }
 
   }
-
 
   /**
    *
@@ -153,7 +159,7 @@ class Sunrise extends Sunrise_Base {
   }
 
   /**
-   * Grabs a WP_screen object.
+   * Grabs the current or a new WP_screen object.
    *
    * Tries to get the current one but if it's not available then it hacks it's way to recreate one
    * because WordPress does not consistently set it, and it's not our place to change it's state.

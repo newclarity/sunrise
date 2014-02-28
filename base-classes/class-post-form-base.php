@@ -76,13 +76,13 @@ class Sunrise_Post_Form_Base extends Sunrise_Form_Base {
   /**
    * @return string
    */
-  function form_layout_html() {
+  function container_html() {
     $html = array( '<div id="post-admin-form-' . $this->form_name . '" class="post-admin-form">' );
     /**
      * @var Sunrise_Field_Base $field
      */
     foreach( $this->get_fields() as $field_name => $field ) {
-      $html[] = $field->field_layout_html();
+      $html[] = $field->container_html();
     }
     $html[] = '</div>';
     return implode( $html );

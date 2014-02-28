@@ -10,7 +10,7 @@ class Sunrise_Html_Element extends Sunrise_Base {
   /**
    * @var string
    */
-  var $element_name;
+  var $tag_name;
 
   /**
    * @var string
@@ -28,12 +28,12 @@ class Sunrise_Html_Element extends Sunrise_Base {
   private $_attributes_parsed;
 
   /**
-   * @param string $element_name
+   * @param string $tag_name
    * @param array $attribute_args
    * @param null|callable|string $element_value
    */
-  function __construct( $element_name, $attribute_args = array(), $element_value = null ) {
-    $this->element_name = $element_name;
+  function __construct( $tag_name, $attribute_args = array(), $element_value = null ) {
+    $this->tag_name = $tag_name;
     $this->_attributes = $attribute_args;
     $this->element_value = $element_value;
   }
@@ -42,17 +42,17 @@ class Sunrise_Html_Element extends Sunrise_Base {
    * @return bool
    */
   function is_void_element() {
-    return preg_match( '#^(' . self::VOID_ELEMENTS . ')$#i', $this->element_name ) ? true : false;
+    return preg_match( '#^(' . self::VOID_ELEMENTS . ')$#i', $this->tag_name ) ? true : false;
   }
 
   /**
    * @return array
    */
   function element_html() {
-    $html = "<{$this->element_name} " . $this->attributes_html() . '>';
+    $html = "<{$this->tag_name} " . $this->attributes_html() . '>';
     if ( ! $this->is_void_element() ) {
       $value = is_callable( $this->element_value ) ? call_user_func( $this->element_value, $this ) : $this->element_value;
-      $html .= "{$value}</{$this->element_name}>";
+      $html .= "{$value}</{$this->tag_name}>";
     }
     return $html;
   }
@@ -61,10 +61,9 @@ class Sunrise_Html_Element extends Sunrise_Base {
    * @return array
    */
   function attributes_html() {
-    $valid_attributes = Sunrise::get_html_attributes( $this->element_name );
+    $valid_attributes = Sunrise::get_html_attributes( $this->tag_name );
     $html = array();
     $attributes = array_filter( $this->attributes() );
-    $attributes['value'] = $this->element_value;
     foreach( $attributes as $name => $value ) {
       if ( $value && isset( $valid_attributes[$name] ) ) {
         $html[] = "{$name}=\"{$value}\"";
@@ -78,7 +77,7 @@ class Sunrise_Html_Element extends Sunrise_Base {
    */
   function attributes() {
     if ( ! $this->_attributes_parsed ) {
-      $attributes = Sunrise::get_html_attributes( $this->element_name );
+      $attributes = Sunrise::get_html_attributes( $this->tag_name );
       foreach( $this->_attributes as $name => $value ) {
         if ( preg_match( '#^html_(.*?)$#', $name, $match ) ) {
           $attributes[sanitize_key( $match[1] )] = esc_attr( $value );
@@ -91,21 +90,21 @@ class Sunrise_Html_Element extends Sunrise_Base {
   }
 
   /**
-   * @param $element_name
+   * @param $attribute_name
    * @return mixed
    */
-  function get_attribute( $element_name ) {
+  function get_attribute( $attribute_name ) {
     $attributes = $this->attributes();
-    return ! empty( $attributes[$element_name] ) ? $attributes[$element_name] : false;
+    return ! empty( $attributes[$attribute_name] ) ? $attributes[$attribute_name] : false;
   }
 
   /**
-   * @param $element_name
+   * @param $attribute_name
    * @return mixed
    */
-  function get_attribute_html( $element_name ) {
-    $value = $this->get_attribute( $element_name );
-    return $value ? " {$element_name}=\"{$value}\"" : false;
+  function get_attribute_html( $attribute_name ) {
+    $value = $this->get_attribute( $attribute_name );
+    return $value ? " {$attribute_name}=\"{$value}\"" : false;
   }
 
 }
