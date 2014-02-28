@@ -3,7 +3,7 @@
  * Plugin Name: Sunrise
  */
 
-require( __DIR__ . '/base-classes/class-base.php' );
+require( __DIR__ . '/base/class-base.php' );
 
 /**
  * Class Sunrise
@@ -26,14 +26,14 @@ class Sunrise extends Sunrise_Base {
    */
   static function on_load() {
 
-    require( __DIR__ . '/core-classes/class-object-classifier.php' );
-    require( __DIR__ . '/core-classes/class-metabox.php' );
-    require( __DIR__ . '/core-classes/class-html-element.php' );
+    require( __DIR__ . '/core/class-object-classifier.php' );
+    require( __DIR__ . '/core/class-metabox.php' );
+    require( __DIR__ . '/core/class-html-element.php' );
 
-    require( __DIR__ . '/base-classes/class-form-base.php' );
-    require( __DIR__ . '/base-classes/class-post-form-base.php' );
-    require( __DIR__ . '/base-classes/class-field-base.php' );
-    require( __DIR__ . '/base-classes/class-feature-base.php');
+    require( __DIR__ . '/base/class-form-base.php' );
+    require( __DIR__ . '/base/class-post-form-base.php' );
+    require( __DIR__ . '/base/class-field-base.php' );
+    require( __DIR__ . '/base/class-feature-base.php');
 
     require( __DIR__ . '/features/class-control-feature.php');
     require( __DIR__ . '/features/class-help-feature.php');
@@ -47,17 +47,17 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/helpers/class-html-elements.php' );
     require( __DIR__ . '/helpers/class-post-admin-forms.php' );
 
-    require( __DIR__ . '/field-types/class-text-field.php' );
-    require( __DIR__ . '/field-types/class-textarea-field.php' );
-    require( __DIR__ . '/field-types/class-url-field.php' );
+    require( __DIR__ . '/fields/class-text-field.php' );
+    require( __DIR__ . '/fields/class-textarea-field.php' );
+    require( __DIR__ . '/fields/class-url-field.php' );
 
-    require( __DIR__ . '/form-types/class-post-admin-form.php' );
+    require( __DIR__ . '/forms/class-post-admin-form.php' );
 
     self::register_form_type( 'post_admin', 'Sunrise_Post_Admin_Form' );
 
-    self::register_field_type( 'text',       'Sunrise_Text_Field' );
-    self::register_field_type( 'textarea',   'Sunrise_Textarea_Field' );
-    self::register_field_type( 'url',       'Sunrise_Url_Field' );
+    self::register_field_type( 'text',     'Sunrise_Text_Field' );
+    self::register_field_type( 'textarea', 'Sunrise_Textarea_Field' );
+    self::register_field_type( 'url',      'Sunrise_Url_Field' );
 
     /**
      * @todo Evaluate if priority 10 is okay or priority 0 is needed for these 'admin_*' hooks.
