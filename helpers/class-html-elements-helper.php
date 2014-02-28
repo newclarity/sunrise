@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class _Sunrise_Html_Elements
+ * Class _Sunrise_Html_Elements_Helper
  */
-class _Sunrise_Html_Elements {
+class _Sunrise_Html_Elements_Helper {
 
   /**
    * @var array
@@ -79,7 +79,7 @@ class _Sunrise_Html_Elements {
   }
 
 }
-_Sunrise_Html_Elements::on_load();
+_Sunrise_Html_Elements_Helper::on_load();
 
 
 

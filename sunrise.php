@@ -8,11 +8,11 @@ require( __DIR__ . '/base/class-base.php' );
 /**
  * Class Sunrise
  *
- * @mixin _Sunrise_Fields
- * @mixin _Sunrise_Forms
- * @mixin _Sunrise_Posts
- * @mixin _Sunrise_Post_Admin_Forms
- * @mixin _Sunrise_Html_Elements
+ * @mixin _Sunrise_Fields_Helper
+ * @mixin _Sunrise_Forms_Helper
+ * @mixin _Sunrise_Posts_Helper
+ * @mixin _Sunrise_Post_Admin_Forms_Helper
+ * @mixin _Sunrise_Html_Elements_Helper
  */
 class Sunrise extends Sunrise_Base {
 
@@ -35,17 +35,17 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/base/class-field-base.php' );
     require( __DIR__ . '/base/class-feature-base.php');
 
-    require( __DIR__ . '/features/class-control-feature.php');
-    require( __DIR__ . '/features/class-help-feature.php');
-    require( __DIR__ . '/features/class-label-feature.php');
-    require( __DIR__ . '/features/class-message-feature.php');
-    require( __DIR__ . '/features/class-infobox-feature.php');
+    require( __DIR__ . '/features/class-control-feature.php' );
+    require( __DIR__ . '/features/class-help-feature.php' );
+    require( __DIR__ . '/features/class-label-feature.php' );
+    require( __DIR__ . '/features/class-message-feature.php' );
+    require( __DIR__ . '/features/class-infobox-feature.php' );
 
-    require( __DIR__ . '/helpers/class-posts.php' );
-    require( __DIR__ . '/helpers/class-forms.php' );
-    require( __DIR__ . '/helpers/class-fields.php' );
-    require( __DIR__ . '/helpers/class-html-elements.php' );
-    require( __DIR__ . '/helpers/class-post-admin-forms.php' );
+    require( __DIR__ . '/helpers/class-posts-helper.php' );
+    require( __DIR__ . '/helpers/class-forms-helper.php' );
+    require( __DIR__ . '/helpers/class-fields-helper.php' );
+    require( __DIR__ . '/helpers/class-html-elements-helper.php' );
+    require( __DIR__ . '/helpers/class-post-admin-forms-helper.php' );
 
     require( __DIR__ . '/fields/class-text-field.php' );
     require( __DIR__ . '/fields/class-textarea-field.php' );

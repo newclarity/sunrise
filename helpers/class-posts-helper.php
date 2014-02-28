@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class _Sunrise_Posts
+ * Class _Sunrise_Posts_Helper
  */
-class _Sunrise_Posts extends Sunrise_Base{
+class _Sunrise_Posts_Helper extends Sunrise_Base{
 
   /**
    *
@@ -21,4 +21,4 @@ class _Sunrise_Posts extends Sunrise_Base{
   }
 
 }
-_Sunrise_Posts::on_load();
+_Sunrise_Posts_Helper::on_load();

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class _Sunrise_Forms
+ * Class _Sunrise_Forms_Helper
  */
-class _Sunrise_Forms extends Sunrise_Base {
+class _Sunrise_Forms_Helper extends Sunrise_Base {
 
   /**
    * @var array
@@ -282,4 +282,4 @@ class _Sunrise_Forms extends Sunrise_Base {
   }
 
 }
-_Sunrise_Forms::on_load();
+_Sunrise_Forms_Helper::on_load();

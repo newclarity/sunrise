@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class _Sunrise_Post_Admin_Forms
+ * Class _Sunrise_Post_Admin_Forms_Helper
  */
-class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
+class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
 
   /**
    *
@@ -105,6 +105,6 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
 
 
 }
-_Sunrise_Post_Admin_Forms::on_load();
+_Sunrise_Post_Admin_Forms_Helper::on_load();
 
 

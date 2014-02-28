@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class _Sunrise_Fields
+ * Class _Sunrise_Fields_Helper
  */
-class _Sunrise_Fields {
+class _Sunrise_Fields_Helper {
 
   /**
    * @var array
@@ -163,4 +163,4 @@ class _Sunrise_Fields {
   }
 
 }
-_Sunrise_Fields::on_load();
+_Sunrise_Fields_Helper::on_load();
