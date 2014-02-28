@@ -17,6 +17,9 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
     Sunrise::register_helper( __CLASS__ );
   }
 
+  /**
+   *
+   */
   static function _admin_init() {
     if ( Sunrise::is_post_edit_screen() ) {
       self::add_static_action( 'add_meta_boxes' );
@@ -79,7 +82,7 @@ class _Sunrise_Post_Admin_Forms extends Sunrise_Form_Base {
      */
     $form = Sunrise::get_post_admin_form( $post->post_type, 'main' );
     $form->object_id = (int)$post->ID;
-    $form->the_container();
+    $form->the_form();
   }
 
   /**

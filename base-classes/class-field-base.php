@@ -18,7 +18,7 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   /**
    *
    */
-  const NO_PREFIX = 'value|parts';
+  const NO_PREFIX = 'value|features';
 
   /**
    *
@@ -88,7 +88,7 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   /**
    * @var array
    */
-  protected $_parts = false;
+  protected $_features = false;
 
   /**
    * @param array $field_args
@@ -170,6 +170,8 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   }
 
   /**
+   * The tag for the 'Control" that this field uses, i.e. input, textarea, select, etc.
+   *
    * @return bool|mixed|string
    */
   function control_tag() {
@@ -205,39 +207,29 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
   }
 
   /**
-   * @return string
+   * @return stdClass
+   *
+   * @todo Features are meant to be extensible. Plans are to add ability to register new feature classes and be able to
+   *       specify them when defining fields.  Plans are also to allow only the features that are needed to be loaded.
    */
-  function get_parts() {
-    if ( ! $this->_parts ) {
-      $this->_parts = array(
-        'label'   => new Sunrise_Label_Container(),
-        'control' => new Sunrise_Control_Container(),
-        'help'    => new Sunrise_Help_Container(),
-        'message' => new Sunrise_Message_Container(),
-        'infobox' => new Sunrise_Infobox_Container(),
+  function get_features() {
+    if ( ! $this->_features ) {
+      $this->_features = array(
+        'label'   => new Sunrise_Label_Feature(),
+        'control' => new Sunrise_Control_Feature(),
+        'help'    => new Sunrise_Help_Feature(),
+        'message' => new Sunrise_Message_Feature(),
+        'infobox' => new Sunrise_Infobox_Feature(),
       );
       /**
-       * @var Sunrise_Container_Base $container
+       * @var Sunrise_Feature_Base $feature
        */
-      foreach( $this->_parts as $container ) {
-        $container->owner = $this;
+      foreach( $this->_features as $feature ) {
+        $feature->owner = $this;
       }
+      $this->_features = (object)$this->_features;
     }
-    return $this->_parts;
-  }
-
-  /**
-   * @return string
-   */
-  function container_html() {
-    $parts = $this->get_parts();
-    $element = new Sunrise_Html_Element( 'section', array(
-      'id'    => $this->html_id,
-      'class' => 'field-layout'
-      ),
-      "{$parts['label']->container_html}{$parts['control']->container_html}<div class=\"clear\"></div>"
-    );
-    return $element->element_html();
+    return $this->_features;
   }
 
   /**
@@ -268,7 +260,22 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
     return "_sf[{$this->field_name}]";
   }
 
+  /**
+   * @return string
+   */
+  function field_html() {
+    $features = $this->get_features();
+    $element = new Sunrise_Html_Element( 'section', array(
+      'id'    => $this->html_id,
+      'class' => 'field-layout'
+      ),
+      "{$features->label->feature_html}{$features->control->feature_html}<div class=\"clear\"></div>"
+    );
+    return $element->element_html();
+  }
+
 }
+
 
 
 

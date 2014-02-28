@@ -33,13 +33,13 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/base-classes/class-form-base.php' );
     require( __DIR__ . '/base-classes/class-post-form-base.php' );
     require( __DIR__ . '/base-classes/class-field-base.php' );
-    require( __DIR__ . '/base-classes/class-container-base.php' );
+    require( __DIR__ . '/base-classes/class-feature-base.php');
 
-    require( __DIR__ . '/containers/class-control-container.php' );
-    require( __DIR__ . '/containers/class-help-container.php' );
-    require( __DIR__ . '/containers/class-label-container.php' );
-    require( __DIR__ . '/containers/class-message-container.php' );
-    require( __DIR__ . '/containers/class-infobox-container.php' );
+    require( __DIR__ . '/features/class-control-feature.php');
+    require( __DIR__ . '/features/class-help-feature.php');
+    require( __DIR__ . '/features/class-label-feature.php');
+    require( __DIR__ . '/features/class-message-feature.php');
+    require( __DIR__ . '/features/class-infobox-feature.php');
 
     require( __DIR__ . '/helpers/class-posts.php' );
     require( __DIR__ . '/helpers/class-forms.php' );
