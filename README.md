@@ -76,8 +76,10 @@ Once you've got Sunrise installed you only need to register your Forms and Field
       ));
     }
 
+**NOTE**:  we assume you already called `register_post_type()` to register the `'pm_solution'` post type in another `'init'` hook somewhere else in your code.
+
 ###3. There is No Step 3!
-That's it, you're done! With the previous code in your theme's `functions.php` file _(or better yet in your own plugin)_ you would now have fields that look like so _(**NOTE**  we assume you already called `register_post_type()` to register the `'pm_solution'` post type):_
+That's it, you're done! With the previous code in your theme's `functions.php` file _(or better yet in your own plugin)_ you would now have fields that look like so:
 
 ![](http://screenshots.newclarity.net/skitched-20140227-152353.png)
 
