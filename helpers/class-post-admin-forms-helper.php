@@ -76,9 +76,10 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
     /**
      * @var Sunrise_Post_Admin_Form $form
      */
-    $form = Sunrise::get_post_admin_form( $post->post_type, 'main' );
-    $form->object_id = (int)$post->ID;
-    $form->the_form();
+    if ( $form = Sunrise::get_post_admin_form( $post->post_type, 'main' ) ) {
+      $form->object_id = (int)$post->ID;
+      $form->the_form();
+    }
   }
 
   /**
