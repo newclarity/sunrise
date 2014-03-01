@@ -9,10 +9,6 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
    *
    */
   static function on_load() {
-//    Sunrise::add_static_filter( __CLASS__, 'default_title', 2 );
-//    Sunrise::add_static_action( __CLASS__, 'wp_insert_post_data', 2 );
-//    Sunrise::add_static_action( __CLASS__, 'save_post', 2 );
-
     self::add_static_action( 'admin_init' );
     Sunrise::register_helper( __CLASS__ );
   }

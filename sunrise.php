@@ -1,6 +1,29 @@
 <?php
 /**
  * Plugin Name: Sunrise
+ * Plugin URI: http://github.com/newclarity/sunrise
+ * Description: Forms and Fields for WordPress
+ * Version: 2.0-alpha
+ * Author: MikeSchinkel
+ * Author URI: http://about.me/mikeschinkel
+ * License: GPL v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Copyright 2010-2014 NewClarity LLC.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2, as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ *
  */
 
 require( __DIR__ . '/base/class-base.php' );
@@ -25,10 +48,12 @@ class Sunrise extends Sunrise_Base {
    *
    */
   static function on_load() {
-
-    require( __DIR__ . '/core/class-object-classifier.php' );
-    require( __DIR__ . '/core/class-metabox.php' );
-    require( __DIR__ . '/core/class-html-element.php' );
+    /**
+     * @todo Plan to implement an autoloader for some of these.
+     */
+    require( __DIR__ . '/support/class-object-classifier.php' );
+    require( __DIR__ . '/support/class-metabox.php' );
+    require( __DIR__ . '/support/class-html-element.php' );
 
     require( __DIR__ . '/base/class-form-base.php' );
     require( __DIR__ . '/base/class-post-form-base.php' );

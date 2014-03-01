@@ -135,7 +135,7 @@ abstract class Sunrise_Base {
         call_user_func( array( $this, $method_name ), $value );
       } else if ( property_exists( $this, $name ) ) {
         $this->{$name} = $value;
-      } else if ( self::non_public_property_exists( $property_name = "_{$name}" ) ) {
+      } else if ( $this->non_public_property_exists( $property_name = "_{$name}" ) ) {
         $this->{$property_name} = $value;
       } else {
         $this->extra[$name] = $value;
@@ -146,8 +146,8 @@ abstract class Sunrise_Base {
   /**
    *
    */
-  static function non_public_property_exists( $property ) {
-    $reflection = new ReflectionClass( get_called_class() );
+  function non_public_property_exists( $property ) {
+    $reflection = new ReflectionClass( get_class( $this ) );
     if ( ! $reflection->hasProperty( $property ) ) {
       $exists = false;
     } else {
