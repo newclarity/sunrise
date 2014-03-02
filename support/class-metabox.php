@@ -4,7 +4,7 @@
  * Class Sunrise_Metabox
  */
 class Sunrise_Metabox extends Sunrise_Base {
-  CONST VAR_PREFX = 'metabox_';
+  const VAR_PREFX = 'metabox_';
 
   /**
    * @var string

@@ -76,7 +76,7 @@ abstract class Sunrise_Base {
    * @return array|bool
    */
   function pre_assign( $args = array() ) {
-  return $args;
+    return $args;
   }
 
   /**
