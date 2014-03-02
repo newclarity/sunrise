@@ -129,11 +129,11 @@ The following methods are the ones we expect will be used most often:
 ###The $args Pattern
 Sunrise makes heavy use of what we call _"The $args Pattern"_. This pattern can be found in use in many aspects of the WordPress core code but by no means in all areas of WordPress core where it could be used.
 
-**@more…**
+**@more...**
 
 ###Object Types
 **@todo...**
-*
+
 ###Rules of Unqualified Object Type Evaluation
 When Object Types are provided as strings they can either be in the format:
 
@@ -164,19 +164,19 @@ Sunrise plans to allocate these names as Reserved Unqualified Object Types but e
 ###Late Fixup and Instantiation
 Unlike `register_post_type()` and `register_taxonomy()` the methods for registering Forms and Fields in Sunrise delay most Fixup and most instantiation until the latest point in page load possible. And for places where it is possible to avoid Fixup and instantiation Sunrise bypasses Fixup and instantiation, such as the instantiation of Fields not used in any current Forms needed for the current page load.
 
-**@more…**
+**@more...**
 
 ###Uniquely Identifying Forms
 Unlike Fields which can be uniquely identified with either their `field_name`, if they are Multiuse Fields, or by a Form and their `field_name` Forms do not have a single unique identifier other than the `form_index` assigned at the time the Form is registered. 
 
 The `register_form()` method returns the registered `form_index` property which can be passed to `register_form_field()` if needed to override the Current Form
 
-examples...
+**examples...**
 
 ###Naming 
 Consistent and rigourous naming is a critical part of the Sunrise architecture. In many  but not all cases the naming drives functionality so that in those cases the naming conventions must be used consistently in order for code to work correctly.
 
-**@more…**
+**@more...**
 
 #### Property Name Prefixes
 We have decided to prefix most of the properties of a class with the class' `VAR_PREFIX`; i.e. for Forms it's `'form_'` and for Fields it is `'field_'`. We do this in all cases that a field name otherwise would not have an underscore but we leave compound property names alone, i.e. `$field->form_name` vs. `$field->object_type`.  
@@ -199,7 +199,7 @@ We use `get_property_name()` for cases where we are generally doing a good bit m
 
 Although theoretically classes should be black boxes and thus we theoretically should have a more consistent naming convention experience has taught us that in reality good developers simply cannot ignore that some operations are time-consuming and might have recursive side-effects. So a perfect example use of the `get_*()` pattern is `$form->get_fields()`.
 
-**@more…**
+**@more...**
 
 ###Internal Property Caching
 **@todo...**
@@ -207,7 +207,7 @@ Although theoretically classes should be black boxes and thus we theoretically s
 ###Location of Hooks
 Hooks needed on page load are only adding by the core Sunrise class and by its Helper Classes. This makes autoloading of the remaining classes viable.
 
-**@more…**
+**@more...**
 
 ###Autoloading 
 **@todo...**
@@ -221,7 +221,7 @@ Hooks needed on page load are only adding by the core Sunrise class and by its H
 - `pre_assign()`
 - `initialize()`
 
-**@more…**
+**@more...**
 
 ###Class Constants
 Sunrise uses many of it's Class Constants as metadata in a manner very similar to how [annotations are used in Java](http://stackoverflow.com/questions/24221/java-annotations) and how [attributes are used in .NET](http://stackoverflow.com/questions/20346/net-what-are-attributes). Sunrise's Class Constants allow base classes to inspect information about child classes and to operate differently based on those constants. 
@@ -232,7 +232,7 @@ Sunrise uses many of it's Class Constants as metadata in a manner very similar t
 - `HTML_TYPE`
 - `FORM_CONTEXT`
 
-**@details…**
+**@details...**
 
 Basically we could have used WordPress filters instead of Class Constants but in the few cases we use them Class Constants are used to both improve runtime performance and simplify the implementation of child classes for Forms, Fields, Features.
 
