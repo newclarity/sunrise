@@ -121,10 +121,12 @@ The Sunrise API is effectively controlled through the `Sunrise` class as a names
 ####Main Sunrise Class Methods
 The following methods are the ones we expect will be used most often:
 
-- `register_form()` - Registers a Form which is a container of fields. Forms are uniquely identified by their Object Type, Form Context and Form Name. [See reference.]()
-- `register_form_field()` - Registers a Field for the most recently registered Form.  [See reference.]()
-- `register_field()` - Registers a Multiuse Field that can be added to multiple forms using the `add_form_field()` method.  [See reference.]()
-- `add_form_field()` - Adds a previously registered Multiuse Field to the most recently registered Form.  [See reference.]()
+Method Name|Description
+-----------|-----------
+`register_form()`|Registers a Form which is a container of fields. Forms are uniquely identified by their Object Type, Form Context and Form Name. [See reference. **@todo...**]()
+`register_form_field()`|Registers a Field for the most recently registered Form.  [See reference. **@todo...**]()
+`register_field()`|Registers a Multiuse Field that can be added to multiple forms using the `add_form_field()` method. [See reference. **@todo...**]()
+`add_form_field()`|Adds a previously registered Multiuse Field to the most recently registered Form.  [See reference. **@todo...**]()
 
 ###The $args Pattern
 Sunrise makes heavy use of what we call _"The $args Pattern"_. This pattern can be found in use in many aspects of the WordPress core code but by no means in all areas of WordPress core where it could be used.
@@ -217,20 +219,25 @@ Hooks needed on page load are only adding by the core Sunrise class and by its H
 
 ###Methods for Subclassing
 
-- `default_args()`
-- `pre_assign()`
-- `initialize()`
+Method Name|Description
+-----------|-----------
+`default_args()`|**@todo...** 
+`do_assign()`|**@todo...**
+`pre_assign()`|**@todo...**
+`initialize()`|**@todo...**
 
 **@more...**
 
 ###Class Constants
 Sunrise uses many of it's Class Constants as metadata in a manner very similar to how [annotations are used in Java](http://stackoverflow.com/questions/24221/java-annotations) and how [attributes are used in .NET](http://stackoverflow.com/questions/20346/net-what-are-attributes). Sunrise's Class Constants allow base classes to inspect information about child classes and to operate differently based on those constants. 
 
-- `VAR_PREFIX`
-- `NO_PREFIX`
-- `CONTROL_TAG`
-- `HTML_TYPE`
-- `FORM_CONTEXT`
+Constant Name|Description
+-------------|-----------
+`VAR_PREFIX`|**@todo...**
+`NO_PREFIX`|**@todo...**
+`CONTROL_TAG`|**@todo...**
+`HTML_TYPE`|**@todo...**
+`FORM_CONTEXT`|**@todo...**
 
 **@details...**
 
@@ -246,35 +253,33 @@ Basically we could have used WordPress filters instead of Class Constants but in
 ##Class Reference
 **@todo...**
 
-###Core Class
-- `Sunrise` - **@todo...**
 
-###Supporting Classes
-- `Sunrise_Object_Classifier` - **@todo...**
-- `Sunrise_Html_Element` - **@todo...**
-- `Sunrise_Metabox`- **@todo...**
-
-###Form Class(es)
-- `Sunrise_Post_Admin_Form` - **@todo...**
-
-###Field Classes
-- `Sunrise_Text_Field` - **@todo...**
-- `Sunrise_Textarea_Field` - **@todo...**
-- `Sunrise_Url_Field` - **@todo...**
-
-###Feature Classes
-- `Sunrise_Control_Feature` - **@todo...**
-- `Sunrise_Label_Feature` - **@todo...**
-- `Sunrise_Help_Feature` - **@todo...**
-- `Sunrise_Infobox_Feature` - **@todo...**
-- `Sunrise_Message_Feature` - **@todo...**
-
-###Helper Classes
-- `_Sunrise_Forms_Helper` - **@todo...**
-- `_Sunrise_Fields_Helper` - **@todo...**
-- `_Sunrise_Html_Elements_Helper` - **@todo...**
-- `_Sunrise_Post_Admin_Forms_Helper` - **@todo...**
-- `_Sunrise_Posts_Helper` - **@todo...**
+Class Name|Description
+----------|-----------
+**CORE CLASS**|---
+`Sunrise`|**@todo...**
+**SUPPORTING CLASSES**|---
+`Sunrise_Object_Classifier`| **@todo...**
+`Sunrise_Html_Element`| **@todo...**
+`Sunrise_Metabox`|**@todo...**
+**FORM CLASS(ES)**|---
+`Sunrise_Post_Admin_Form`| **@todo...**
+**FIELD CLASSES**|---
+`Sunrise_Text_Field`| **@todo...**
+`Sunrise_Textarea_Field`| **@todo...**
+`Sunrise_Url_Field`| **@todo...**
+**FEATURE CLASSES**|---
+`Sunrise_Control_Feature`| **@todo...**
+`Sunrise_Label_Feature`| **@todo...**
+`Sunrise_Help_Feature`| **@todo...**
+`Sunrise_Infobox_Feature`| **@todo...**
+`Sunrise_Message_Feature`| **@todo...**
+**HELPER CLASSES**|---
+`_Sunrise_Forms_Helper`| **@todo...**
+`_Sunrise_Fields_Helper`| **@todo...**
+`_Sunrise_Html_Elements_Helper`| **@todo...**
+`_Sunrise_Post_Admin_Forms_Helper`| **@todo...**
+`_Sunrise_Posts_Helper`| **@todo...**
 
 ##Glossary
 Sunrise takes great pains to name aspects of its architecture and to be very consistent with the way in which those names are used. So here is the 
