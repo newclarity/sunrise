@@ -5,7 +5,7 @@ Forms & Fields for Post Types in the WordPress Admin
 ##CONTENTS
 - [IMPORTANT!](#important)
 - [Background](#background)
-- [QuickStart](#quickStart)
+- [QuickStart](#quickstart)
 - [Usage](#usage)
 - [Architecture](#architecture)
 - [Class Reference](#class-reference)
