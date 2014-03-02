@@ -36,7 +36,7 @@ _This_ Sunrise will be released out of beta as Sunrise v2.0.
 
 ###About This Sunrise and WordPress' Early Load sunrise.php File
 
-This Sunrise has **absolutely no relationship** with [the `sunrise.php` file recognized by WordPress during bootstrap](http://wordpress-hackers.1065353.n5.nabble.com/Use-case-for-sunrise-php-td32639.html). And as this Sunrise won't conflict at a technical level with WordPress' `sunrise.php` we're keeping the name we picked back in 2010 before we knew such a filename in the `/wp-content/` directory was special to WordPress. Because we like the name.
+This Sunrise has **no relationship** with [the `sunrise.php` file recognized by WordPress during bootstrap](http://wordpress-hackers.1065353.n5.nabble.com/Use-case-for-sunrise-php-td32639.html). And as this Sunrise won't conflict at a technical level with WordPress' `sunrise.php` we're keeping the name we picked back in 2010 before we knew such a filename in the `/wp-content/` directory was special to WordPress. Because we like the name.
 
 ##QuickStart
 
@@ -55,7 +55,7 @@ Once you've added Sunrise into its own directory within the must-use plugins dir
 
 
 ###2. Registering Forms and Fields:
-Once you've got Sunrise installed you only need to register your Forms and Fields in an `'init'` hook. The following will add the three (3) fields `'website'`, `'tagline'` and '`blurb`' to the `pm_solution` page:
+Once you've got Sunrise installed you only need to register your Forms and Fields in an `'init'` hook. The following will add the three (3) fields `'website'`, `'tagline'` and '`blurb`' to the Add New/Edit page in the admin for the `'pm_solution'` custom post type:
 
     <?php 
     /**
