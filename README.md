@@ -2,7 +2,16 @@
 
 Forms & Fields for Post Types in the WordPress Admin
 
-##IMPORTANT:
+##CONTENTS
+- [IMPORTANT!](#important)
+- [Background](#background)
+- [QuickStart](#quickStart)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Class Reference](#class-reference)
+- [Glossary](#glossary)
+
+##IMPORTANT!
 - Sunrise **is currently alpha-level software** and thus it's **API will change** before it is released as Sunrise v2.0 _(Don't say we didn't warn you!)_
 - Many of **the glossary terms are tenative**; if you have ideas for better terms then **please propose your suggestions** using the GitHub issue tracker.
 
@@ -83,51 +92,24 @@ That's it, you're done! With the previous code in your theme's `functions.php` f
 
 ![](http://screenshots.newclarity.net/skitched-20140227-152353.png)
 
-
 Of course **we don't actually recommend using global functions for your hooks**. Instead [see this blog post](http://hardcorewp.com/2012/using-classes-as-code-wrappers-for-wordpress-plugins/) to learn how to use classes as code wrappers for your WordPress Plugin.
 
 ##Usage
-
+**@todo...**
 ###Registering a Form
+**@todo...**
 ###Registering a Field to a Form
+**@todo...**
 ###Registering a Multiuse Field
+**@todo...**
 ###Adding a Multiuse Field to a Form
-
-
-
+**@todo...**
 ###Registering and Adding Multiuse Fields
-
+**@todo...**
 ###Registering and Using Field Prototypes
-
+**@todo...**
 ###Developing and Registering New Field Types Classes.
-
-##Rules of Unqualified Object Type Evaluation
-When Object Types are provided as strings they can either be in the format:
-
-- `"{$object_type}/{$subtype}"` or 
-- `"{$unqualified_object_type}"` 
-
-For example:
-
-- `"post/page"` or 
-- `"my_custom_post_type"` or 
-- `"comment"` 
-
-Sunrise understands that `"my_custom_post_type"` expands to `"post/my_custom_post_type"` because _"my_custom_post_type"_ is _**not**_ one of the Reserved Unqualified Object Types. 
-
-Conversely `"comment"` expands to `"comment/"` because it _**is**_ one of the Reserved Unqualified Object Types and _(currently)_ WordPress does not support the concept of a subtype for a Comment.
-
-###Reserved Unqualified Object Types
-Sunrise plans to allocate these names as Reserved Unqualified Object Types but expects to possibly add more before the version of Sunrise is released as non-beta:
-
-- User
-- Comment
-- Option
-- Term
-- Taxonomy 
-- Site
-- Network
-
+**@todo...**
 
 ##Architecture
 
@@ -147,16 +129,54 @@ The following methods are the ones we expect will be used most often:
 ###The $args Pattern
 Sunrise makes heavy use of what we call _"The $args Pattern"_. This pattern can be found in use in many aspects of the WordPress core code but by no means in all areas of WordPress core where it could be used.
 
+**@more…**
+
+###Object Types
+**@todo...**
+*
+###Rules of Unqualified Object Type Evaluation
+When Object Types are provided as strings they can either be in the format:
+
+- `"{$object_type}/{$subtype}"` or 
+- `"{$unqualified_object_type}"` 
+
+For example:
+
+- `"post/page"` or 
+- `"my_custom_post_type"` or 
+- `"comment"` 
+
+Sunrise understands that `"my_custom_post_type"` expands to `"post/my_custom_post_type"` because _"my_custom_post_type"_ is _**not**_ one of the Reserved Unqualified Object Types. 
+
+Conversely `"comment"` expands to `"comment/"` because it _**is**_ one of the Reserved Unqualified Object Types and _(currently)_ WordPress does not support the concept of a subtype for a Comment.
+
+####Reserved Unqualified Object Types
+Sunrise plans to allocate these names as Reserved Unqualified Object Types but expects to possibly add more before the version of Sunrise is released as non-beta:
+
+- User
+- Comment
+- Option
+- Term
+- Taxonomy 
+- Site
+- Network
+
 ###Late Fixup and Instantiation
 Unlike `register_post_type()` and `register_taxonomy()` the methods for registering Forms and Fields in Sunrise delay most Fixup and most instantiation until the latest point in page load possible. And for places where it is possible to avoid Fixup and instantiation Sunrise bypasses Fixup and instantiation, such as the instantiation of Fields not used in any current Forms needed for the current page load.
+
+**@more…**
 
 ###Uniquely Identifying Forms
 Unlike Fields which can be uniquely identified with either their `field_name`, if they are Multiuse Fields, or by a Form and their `field_name` Forms do not have a single unique identifier other than the `form_index` assigned at the time the Form is registered. 
 
 The `register_form()` method returns the registered `form_index` property which can be passed to `register_form_field()` if needed to override the Current Form
 
+examples...
+
 ###Naming 
 Consistent and rigourous naming is a critical part of the Sunrise architecture. In many  but not all cases the naming drives functionality so that in those cases the naming conventions must be used consistently in order for code to work correctly.
+
+**@more…**
 
 #### Property Name Prefixes
 We have decided to prefix most of the properties of a class with the class' `VAR_PREFIX`; i.e. for Forms it's `'form_'` and for Fields it is `'field_'`. We do this in all cases that a field name otherwise would not have an underscore but we leave compound property names alone, i.e. `$field->form_name` vs. `$field->object_type`.  
@@ -179,14 +199,21 @@ We use `get_property_name()` for cases where we are generally doing a good bit m
 
 Although theoretically classes should be black boxes and thus we theoretically should have a more consistent naming convention experience has taught us that in reality good developers simply cannot ignore that some operations are time-consuming and might have recursive side-effects. So a perfect example use of the `get_*()` pattern is `$form->get_fields()`.
 
-...
+**@more…**
 
 ###Internal Property Caching
+**@todo...**
 
 ###Location of Hooks
 Hooks needed on page load are only adding by the core Sunrise class and by its Helper Classes. This makes autoloading of the remaining classes viable.
 
+**@more…**
+
 ###Autoloading 
+**@todo...**
+
+###Validation
+**@todo...**
 
 ###Methods for Subclassing
 
@@ -194,6 +221,7 @@ Hooks needed on page load are only adding by the core Sunrise class and by its H
 - `pre_assign()`
 - `initialize()`
 
+**@more…**
 
 ###Class Constants
 Sunrise uses many of it's Class Constants as metadata in a manner very similar to how [annotations are used in Java](http://stackoverflow.com/questions/24221/java-annotations) and how [attributes are used in .NET](http://stackoverflow.com/questions/20346/net-what-are-attributes). Sunrise's Class Constants allow base classes to inspect information about child classes and to operate differently based on those constants. 
@@ -204,14 +232,49 @@ Sunrise uses many of it's Class Constants as metadata in a manner very similar t
 - `HTML_TYPE`
 - `FORM_CONTEXT`
 
+**@details…**
+
 Basically we could have used WordPress filters instead of Class Constants but in the few cases we use them Class Constants are used to both improve runtime performance and simplify the implementation of child classes for Forms, Fields, Features.
 
 ###The Sunrise_Base Class
-
+**@todo...**
 
 ###Target Platforms
 - Sunrise is currently designed to **target HTML5** without loosing too much functionality in HTML4, 
 - Sunrise **requires PHP 5.3** or later because it uses `get_called_class()` to provide Helper Classes and Methods. Note that this is not critical to the architecture but would require a build step using Grunt or similar given the current source file structure and layout.
+
+##Class Reference
+**@todo...**
+
+###Core Class
+- `Sunrise` - **@todo...**
+
+###Supporting Classes
+- `Sunrise_Object_Classifier` - **@todo...**
+- `Sunrise_Html_Element` - **@todo...**
+- `Sunrise_Metabox`- **@todo...**
+
+###Form Class(es)
+- `Sunrise_Post_Admin_Form` - **@todo...**
+
+###Field Classes
+- `Sunrise_Text_Field` - **@todo...**
+- `Sunrise_Textarea_Field` - **@todo...**
+- `Sunrise_Url_Field` - **@todo...**
+
+###Feature Classes
+- `Sunrise_Control_Feature` - **@todo...**
+- `Sunrise_Label_Feature` - **@todo...**
+- `Sunrise_Help_Feature` - **@todo...**
+- `Sunrise_Infobox_Feature` - **@todo...**
+- `Sunrise_Message_Feature` - **@todo...**
+
+###Helper Classes
+- `_Sunrise_Forms_Helper` - **@todo...**
+- `_Sunrise_Fields_Helper` - **@todo...**
+- `_Sunrise_Html_Elements_Helper` - **@todo...**
+- `_Sunrise_Post_Admin_Forms_Helper` - **@todo...**
+- `_Sunrise_Posts_Helper` - **@todo...**
 
 ##Glossary
 Sunrise takes great pains to name aspects of its architecture and to be very consistent with the way in which those names are used. So here is the 
@@ -233,7 +296,7 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
 - **Object Type** - A classifier for an object type that has both object_type and subtype properties. An Object Type can be representing using a string of the format `"{$object_type}/{$subtype}"` or as an instance of the `Sunrise_Object_Classifier`. 
 	- The class constructor accepts a string formatted to represent an Object Type and the constructor by delegation parses it into the two (2) properties `$classifier->object_type` and `$classifier->subtype`. The class also has a `__ToString()` method that allows the Object Type's value to be cast to a correctly formatted string when that is needed.
 
-- **Unqualified Object Types** - A classifier string that does not contain a slash but still uniquely identifies the Object Type by following rules for evaluation. See the section titled _"[_Rules of Unqualified Object Type Evaluation_](#rulesofunqualifiedobjecttypeevaluation)."_
+- **Unqualified Object Types** - A classifier string that does not contain a slash but still uniquely identifies the Object Type by following rules for evaluation. See the section titled _"[_Rules of Unqualified Object Type Evaluation_](#rules-of-unqualified-object-type-evaluation)."_
 
 - **Form Context** - A simple string identifying the targeted location for the form, i.e. `'admin'` or `'theme'`.  Together with the Form's Object Type and form name the Form Context gives Sunrise enough information to determine where the Form would be presented to the user.
 
@@ -245,45 +308,9 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
         
 	- Note that using the `add_static_action()` method enforces an underscore prefix on methods to indicate the method should be considered _non-public_ for external users of the class. For more on Static Actions and Filters such as how to handle priorities other than 10 and how to change the hook name [see details]().
 
-- **Multiuse Field** - 
-- **Helper Classes and Methods** - 
-- **Storage** -
-- **Class Constants** -
-- **Current Form** - `Sunrise::form_index()
-
-
-##Validation
-
-##Class Reference
-
-###Core Class
-- `Sunrise` - 
-
-###Supporting Classes
-- `Sunrise_Object_Classifier` - 
-- `Sunrise_Html_Element` - 
-- `Sunrise_Metabox`- 
-
-###Form Class(es)
-- `Sunrise_Post_Admin_Form` - 
-
-###Field Classes
-- `Sunrise_Text_Field` - 
-- `Sunrise_Textarea_Field` - 
-- `Sunrise_Url_Field` - 
-
-###Feature Classes
-- `Sunrise_Control_Feature` - 
-- `Sunrise_Label_Feature` - 
-- `Sunrise_Help_Feature` - 
-- `Sunrise_Infobox_Feature` - 
-- `Sunrise_Message_Feature` - 
-
-###Helper Classes
-- `_Sunrise_Forms_Helper` - 
-- `_Sunrise_Fields_Helper` - 
-- `_Sunrise_Html_Elements_Helper` - 
-- `_Sunrise_Post_Admin_Forms_Helper` - 
-- `_Sunrise_Posts_Helper` - 
-
+- **Multiuse Field** - **@todo...**
+- **Helper Classes and Methods** - **@todo...**
+- **Storage** - **@todo...**
+- **Class Constants** - **@todo...**
+- **Current Form** - `Sunrise::form_index() **@todo...**
 
