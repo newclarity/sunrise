@@ -293,8 +293,9 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
 
 - **Object** - Generic term used to refer collectively to named well-known entities withing WordPress such as Post, User, Comment, Taxonomy, Term, etc. Currently Sunrise only supports Posts but plans to support the others in the near future.
 
-- **Object Type** - A classifier for an object type that has both object_type and subtype properties. An Object Type can be representing using a string of the format `"{$object_type}/{$subtype}"` or as an instance of the `Sunrise_Object_Classifier`. 
-	- The class constructor accepts a string formatted to represent an Object Type and the constructor by delegation parses it into the two (2) properties `$classifier->object_type` and `$classifier->subtype`. The class also has a `__ToString()` method that allows the Object Type's value to be cast to a correctly formatted string when that is needed.
+- **Object Type** - A classifier for an object type that has both `object_type` and `subtype` properties. An Object Type can be representing using a string of the format `"{$object_type}/{$subtype}"` or as an instance of the `Sunrise_Object_Classifier` i.e. `'post/post'`, `'post/page'`, `'post/pm_solution'` and `'user/'`.
+	- The class constructor accepts a string formatted to represent an Object Type and the constructor by delegation parses it into the two (2) properties `$classifier->object_type` and `$classifier->subtype`. 
+	- The class also has a `__ToString()` method that allows the Object Type's value to be cast to a correctly formatted string when that is needed.
 
 - **Unqualified Object Types** - A classifier string that does not contain a slash but still uniquely identifies the Object Type by following rules for evaluation. See the section titled _"[_Rules of Unqualified Object Type Evaluation_](#rules-of-unqualified-object-type-evaluation)."_
 
