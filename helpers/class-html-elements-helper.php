@@ -18,6 +18,42 @@ class _Sunrise_Html_Elements_Helper {
   }
 
   /**
+   * @param string $tag_name
+   * @param array $attributes
+   * @param mixed $value
+   * @return Sunrise_Html_Element
+   */
+  static function get_element_html( $tag_name, $attributes, $value ) {
+    $html_element = self::get_html_element( $tag_name, $attributes, $value, true );
+    return $html_element->element_html();
+  }
+
+  /**
+   * @param string $tag_name
+   * @param array $attributes
+   * @param mixed $value
+   * @param bool $reuse
+   * @return Sunrise_Html_Element
+   */
+  static function get_html_element( $tag_name, $attributes, $value, $reuse = false ) {
+    if ( ! $reuse ) {
+      $element = new Sunrise_Html_Element( $tag_name, $attributes, $value );
+    } else {
+      /**
+       * @var Sunrise_Html_Element $reusable_element
+       */
+      static $reusable_element = false;
+      if ( ! $reusable_element ) {
+        $reusable_element = new Sunrise_Html_Element( $tag_name, $attributes, $value );
+      } else {
+        $reusable_element->reset_element( $tag_name, $attributes, $value );
+      }
+      $element = $reusable_element;
+    }
+    return $element;
+  }
+
+  /**
    * @param $html_element
    * @return array
    */
@@ -46,6 +82,10 @@ class _Sunrise_Html_Elements_Helper {
 
         case 'textarea':
           $more_attributes = array( 'cols', 'name', 'rows', 'tabindex', 'wrap' );
+          break;
+
+        case 'label':
+          $more_attributes = array( 'for', 'form' );
           break;
 
         case 'ul':

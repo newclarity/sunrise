@@ -10,13 +10,11 @@ class Sunrise_Control_Feature extends Sunrise_Feature_Base {
    */
   function feature_html() {
     $field = $this->owner;
-    $element = new Sunrise_Html_Element( 'div', array(
-      'id' => "{$field->html_id}-field-control",
-      'class' => 'field-control',
-      ),
-      $field->element_html()
+    $attributes = array(
+      'html_id' => "{$field->html_id}-field-control",
+      'html_class' => "field-control",
     );
-    return $element->element_html();
+    return Sunrise::get_element_html( 'div', $attributes, $field->element_html() );
   }
 
 }

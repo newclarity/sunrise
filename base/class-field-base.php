@@ -4,6 +4,7 @@
  * Class Sunrise_Field_Base
  *
  * @property string $html_id
+ * @property string $html_name
  * @property string $html_type
  * @property string $attributes_html
  */

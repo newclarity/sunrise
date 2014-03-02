@@ -29,13 +29,23 @@ class Sunrise_Html_Element extends Sunrise_Base {
 
   /**
    * @param string $tag_name
-   * @param array $attribute_args
-   * @param null|callable|string $element_value
+   * @param array $attributes
+   * @param null|callable|string $value
    */
-  function __construct( $tag_name, $attribute_args = array(), $element_value = null ) {
+  function __construct( $tag_name, $attributes = array(), $value = null ) {
+    $this->reset_element( $tag_name, $attributes, $value );
+  }
+
+  /**
+   * @param string $tag_name
+   * @param array $attributes
+   * @param null|callable|string $value
+   */
+  function reset_element( $tag_name, $attributes = array(), $value = null ) {
     $this->tag_name = $tag_name;
-    $this->_attributes = $attribute_args;
-    $this->element_value = $element_value;
+    $this->_attributes = wp_parse_args( $attributes );
+    $this->element_value = $value;
+    $this->_attributes_parsed = false;
   }
 
   /**
