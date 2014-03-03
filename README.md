@@ -337,7 +337,7 @@ The main difference you'll find between Sunrise and most other Form & Field plug
 2. Appreciate a solution with a minimal, clean and highly consistent API, 
 3. Want a solution whose major architectural focus was performance, 
 4. Need a fully extensible OOP-based solution that won't box them in, and 
-5. Sunrise was not released for the purpose of selling to you, or upselling you to a Pro version. It's free-as-in-beer open-source all the way.
+5. Prefer a free-as-in-beer open-source solution, not one released for the purpose of selling to you, or upselling you to a Pro version.
 
 While other solutions may address some of these points we are unaware of any others that address them add besides Sunrise.
 
