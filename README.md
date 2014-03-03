@@ -3,6 +3,7 @@
 Forms & Fields for Post Types in the WordPress Admin
 
 ##CONTENTS
+- [Who is Sunrise For?](#who-is-sunrise-for)
 - [IMPORTANT!](#important)
 - [Background](#background)
 - [QuickStart](#quickstart)
@@ -10,6 +11,12 @@ Forms & Fields for Post Types in the WordPress Admin
 - [Architecture](#architecture)
 - [Class Reference](#class-reference)
 - [Glossary](#glossary)
+- [Comparison To Other Solutions](#comparison-to-other-solutions)
+
+##Who is Sunrise For?
+Sunrise is **for site builders**, not end-users. To use Sunrise requires understanding PHP, although it takes very little PHP expertise to use Sunrise effectively. If you can correctly call the WordPress function `register_post_type()` in an `'init'` hook then you can add Forms and Fields to your post types using Sunrise.
+
+More specifically, **Sunrise was designed for** use by development teams within **agencies, corporations and government** who are building WordPress-based websites for external and internal clients. That's our use-case and so we have built a tool designed to address our needs as well as to make easier the jobs of others in our same roles.
 
 ##IMPORTANT!
 - Sunrise **is currently alpha-level software** and thus it's **API will change** before it is released as Sunrise v2.0 _(Don't say we didn't warn you!)_
@@ -95,7 +102,7 @@ That's it, you're done! With the previous code in your theme's `functions.php` f
 Of course **we don't actually recommend using global functions for your hooks**. Instead [see this blog post](http://hardcorewp.com/2012/using-classes-as-code-wrappers-for-wordpress-plugins/) to learn how to use classes as code wrappers for your WordPress Plugin.
 
 ##Usage
-**@todo...**
+Sunrise is designed to be as simple as possible to use yet still provide headroom for when the client says: _"But it must work **exactly** like this!"_ 
 ###Registering a Form
 **@todo...**
 ###Registering a Field to a Form
@@ -320,3 +327,21 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
 - **Class Constants** - **@todo...**
 - **Current Form** - `Sunrise::form_index() **@todo...**
 
+##Comparison To Other Solutions
+The main different you'll find between Sunrise and most other Form & Field plugins is that Sunrise was designed for coders who:
+
+1. Use version control so can't store form and field definitions in the database,
+2. Appreciate a solution with a minimal, clean and highly consistent API, 
+3. Want a solution whose major architectural focus was performance, and 
+4. Need a fully extensible OOP-based solution that won't box them in.
+
+While some other solutions address some of these points we are unaware of any others that address them add besides Sunrise.
+
+###Custom Metaboxes
+**@todo...**
+###Advanced Custom Fields
+**@todo...**
+###Types and Fields
+**@todo...**
+###MasterPress
+**@todo...**
