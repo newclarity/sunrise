@@ -321,11 +321,14 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
         
 	- Note that using the `add_static_action()` method enforces an underscore prefix on methods to indicate the method should be considered _non-public_ for external users of the class. For more on Static Actions and Filters such as how to handle priorities other than 10 and how to change the hook name [see details]().
 
-- **Multiuse Field** - **@todo...**
-- **Helper Classes and Methods** - **@todo...**
+- **Multiuse Field** - Fields in Sunrise are either specific to a Form or they are Multiuse Fields meaning they can be added to multiple forms by name. To register a Multiuse Field use `Sunrise::register_field()` method vs. the `Sunrise::register_form_field()` method, the latter of which registers the Field and associates it exclusively with the most recently registered Form.
+
+- **Helper Classes and Methods** - Helper Classes are classes with only `static` methods designed to contribute their methods to the `Sunrise` class to enable the streamlined API of Sunrise. Within Sunrise all helper classes are found in the `/helper/` subdirectory and are named with a leading underscore to indicate they are not designed to be referenced by name directly outside of the class file itself. To add a helper class you simple register it with `Sunrise::register_helper( $class_name );` and then all it's `static` methods can be called via the `Sunrise` class. However, if you do this be sure [to prefix your method names](http://nacin.com/2010/05/11/in-wordpress-prefix-everything/) with your plugin's or theme's own unique prefix. 
+
+- **Current Form** - The Current Form in Sunrise is the form most recently registered using `Sunrise::register_form();`. The method `Sunrise::register_form_field();` adds the newly registered Field to the Current Form. Th `register_form()` method also returns the `$form_index` in case you need to later change the Current Form with `Sunrise::set_form_index( $form_index );`. You can also capture the Current Form's Index by calling `Sunrise::form_index();` after any forms have been registered.
+
 - **Storage** - **@todo...**
 - **Class Constants** - **@todo...**
-- **Current Form** - `Sunrise::form_index() **@todo...**
 
 ##Comparison To Other Solutions
 The main difference you'll find between Sunrise and most other Form & Field plugins/solutions is Sunrise was designed for coders who:
@@ -338,11 +341,21 @@ The main difference you'll find between Sunrise and most other Form & Field plug
 
 While other solutions may address some of these points we are unaware of any others that address them add besides Sunrise.
 
-###Custom Metaboxes
+###[Custom Metadata Manager](http://wordpress.org/plugins/custom-metadata/)
 **@todo...**
-###Advanced Custom Fields
+###[Custom Metaboxes and Fields for WordPress](http://webdevstudios.com/2013/12/03/custom-metaboxes-and-fields-1-0-0-released/)
 **@todo...**
-###Types and Fields
+###[Advanced Custom Fields](http://wordpress.org/plugins/advanced-custom-fields/) 
 **@todo...**
-###MasterPress
+###[Types - Custom Fields and Custom Post Types Management](http://wordpress.org/plugins/types/)
 **@todo...**
+###[MasterPress](http://masterpressplugin.com/)
+**@todo...**
+###[WPAlchemy Metabox PHP Class](http://www.farinspace.com/wpalchemy-metabox/)
+The `WPAlchemy_MetaBox` PHP class **@todo...**
+###[Custom Field Template](http://wordpress.org/plugins/custom-field-template/)
+**@todo...**
+###[Admin Page Framework](http://wordpress.org/plugins/admin-page-framework/)
+**@todo...**
+
+
