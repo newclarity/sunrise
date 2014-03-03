@@ -31,18 +31,42 @@ class _Sunrise_Fields_Helper {
   }
 
   /**
-   *
+   * @param string $field_name
+   * @param array $args
+   * @return Sunrise_Field_Base
    */
-  static function _fixup_fields() {
-    $fields = self::$_fields['index'];
-    foreach( $fields as $field_index => $field_args ) {
-      if ( isset( $field_args['type'] ) && ! isset( $field_args['field_type'] ) ) {
-        $field_args['field_type'] = $field_args['type'];
-        unset( $field_args['type'] );
-        $fields[$field_index] = $field_args;
+  static function field( $field_name, $args = array() ) {
+    global $post;
+    $field = null;
+    $args = Sunrise::ensure_object_type( $args );
+    $key = $field_name . md5( serialize( Sunrise::ensure_form_query_args( $args ) ) );
+    if ( ! isset( self::$_fields['keyed'][$key] ) ) {
+      $fields = Sunrise::get_form_fields( $args );
+      if ( isset( $fields[$field_name] ) ) {
+        /**
+         * @var Sunrise_Field_Base $field
+         */
+        $field = $fields[$field_name];
+        self::$_fields['keyed'][$key] = $field;
       }
     }
-    self::$_fields['index'] = $fields;
+    return $field;
+  }
+
+  /**
+   * @param string $field_name
+   * @param array $args
+   * @return mixed
+   */
+  static function field_html( $field_name, $args = array() ) {
+    global $post;
+    $value = null;
+    $field = self::field( $field_name, Sunrise::ensure_object_id( $args ) );
+    if ( $field ) {
+      $field->set_object_id( $args['object_id'] );
+      $value = $field->value();
+    }
+    return $value;
   }
 
   /**
@@ -56,7 +80,6 @@ class _Sunrise_Fields_Helper {
     Sunrise::_index_field( $field_name, $field_index );
     return $field_index;
   }
-
 
   /**
    * @param $field_name
@@ -160,6 +183,21 @@ class _Sunrise_Fields_Helper {
    */
   private static function _get_field_type( $field_type ) {
     return self::$_field_types[$field_type];
+  }
+
+  /**
+   *
+   */
+  static function _fixup_fields() {
+    $fields = self::$_fields['index'];
+    foreach( $fields as $field_index => $field_args ) {
+      if ( isset( $field_args['type'] ) && ! isset( $field_args['field_type'] ) ) {
+        $field_args['field_type'] = $field_args['type'];
+        unset( $field_args['type'] );
+        $fields[$field_index] = $field_args;
+      }
+    }
+    self::$_fields['index'] = $fields;
   }
 
 }

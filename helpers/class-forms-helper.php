@@ -20,11 +20,6 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
   );
 
   /**
-   * @var Sunrise_Object_Classifier
-   */
-  private static $_temp_object_classifier;
-
-  /**
    * @var array
    */
   private static $_form_types = array();
@@ -45,20 +40,6 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
   static function on_load() {
     self::$_allowed_form_args = array_flip( self::$_allowed_form_args );
     Sunrise::register_helper( __CLASS__ );
-    self::$_temp_object_classifier = new Sunrise_Object_Classifier();
-  }
-
-  /**
-   * @param array $form_args
-   * @return array
-   */
-  private static function _ensure_object_type( $form_args ) {
-    $form_args = wp_parse_args( $form_args );
-    if ( empty( $form_args['object_type'] ) || ! $form_args['object_type'] instanceof Sunrise_Object_Classifier ) {
-      self::$_temp_object_classifier->assign( $form_args['object_type'] );
-      $value = self::$_temp_object_classifier;
-    }
-    return $form_args;
   }
 
   /**
@@ -66,7 +47,7 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
    * @return array
    */
   static function get_forms( $form_args = array() ) {
-    $form_args = self::_ensure_object_type( $form_args );
+    $form_args = Sunrise::ensure_object_type( $form_args );
     if ( 0 == count( $form_args ) ) {
       $forms = self::$_forms['index'];
     } else {
@@ -74,13 +55,47 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
       ksort( $form_args );
       foreach( $form_args as $name => $value ) {
         $value = self::_normalize_form_args( $name, $value );
-        $key[] = "{$name}={$value}";
+        if ( $value ) {
+          $key[] = "{$name}={$value}";
+        }
       }
       $keyed = self::$_forms['keyed'];
       $key = implode( '&', $key );
       $forms = count( $key ) && isset( $keyed[$key] ) ? $keyed[$key] : array();
     }
     return $forms;
+  }
+
+  /**
+   * Ensure that the $args passed in contain all form query $args and only form query $args.
+   *
+   * @param array $query_args
+   * @return array
+   */
+  static function ensure_form_query_args( $query_args = array() ) {
+    $query_args = wp_parse_args( $query_args, $default_args = array(
+      'object_type'  => false,
+      'form_context' => false,
+      'form_name'    => false,
+    ));
+    return array_intersect_key( $query_args, $default_args );
+  }
+
+  /**
+   *
+   */
+  static function get_form_fields( $query_args = array() ) {
+    $value = false;
+    $query_args = self::ensure_form_query_args( $query_args );
+    $forms = Sunrise::get_forms( $query_args );
+    $fields = array();
+    /**
+     * @var Sunrise_Form_Base $form
+     */
+    foreach( $forms as $index => $form ) {
+      $fields = array_merge( $form->get_fields(), $fields );
+    }
+    return $fields;
   }
 
   /**
@@ -251,8 +266,7 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
     $form_args = wp_parse_args( $form_args );
     foreach( $form_args as $name => $value ) {
       if ( 'object_type' == $name && ! $value instanceof Sunrise_Object_Classifier ) {
-        self::$_temp_object_classifier->assign( $value );
-        $value = self::$_temp_object_classifier;
+        $value = new Sunrise_Object_Classifier( $value );
       }
     }
     return $form_args;

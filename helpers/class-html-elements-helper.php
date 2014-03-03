@@ -100,6 +100,10 @@ class _Sunrise_Html_Elements_Helper {
           $more_attributes = array( 'type', 'value' );
           break;
 
+        case 'a':
+          $more_attributes = array( 'charset', 'coords', 'download', 'href', 'hreflang', 'media', 'rel', 'target', 'type' );
+          break;
+
         case 'section':
         case 'div':
         case 'span':

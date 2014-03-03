@@ -20,7 +20,7 @@ class Sunrise_Object_Classifier {
   protected static $_core_object_types = array(
     'post'     => array( 'has_subtype' => true ),
     'user'     => array( 'has_subtype' => false ),
-    'comment' => array( 'has_subtype' => false ),
+    'comment'  => array( 'has_subtype' => false ),
   );
 
   /**
@@ -39,9 +39,15 @@ class Sunrise_Object_Classifier {
    *
    *     $this->assign(
    *
-   * @param string|array|Sunrise_Object_Classifier $object_type
+   * @param bool|string|array|Sunrise_Object_Classifier $object_type
    */
-  function assign( $object_type ) {
+  function assign( $object_type = false ) {
+
+    if ( empty( $object_type ) ) {
+      global $post;
+      $object_type =  isset( $post->post_type ) ? "post/{$post->post_type}" : 'post/post';
+    }
+
     if ( is_a( $object_type, __CLASS__ ) ) {
       $this->object_type = $object_type->object_type;
       $this->subtype = $object_type->subtype;

@@ -275,6 +275,27 @@ abstract class Sunrise_Field_Base extends Sunrise_Base {
     return $element->element_html();
   }
 
+  /**
+   * @param string $field_name
+   * @param array $args
+   * @return Sunrise_Field_Base
+   */
+  function field( $field_name, $args ) {
+    if ( isset( $this->form->object_id ) ) {
+      $args['object_id'] = $this->form->object_id;
+    }
+    return Sunrise::field( $field_name, $args );
+  }
+
+  /**
+   * @param $object_id
+   */
+  function set_object_id( $object_id ) {
+    if ( property_exists( $this->form, 'object_id' ) ) {
+      $this->form->object_id = $object_id;
+    }
+  }
+
 }
 
 

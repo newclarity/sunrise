@@ -36,6 +36,7 @@ require( __DIR__ . '/base/class-base.php' );
  * @mixin _Sunrise_Posts_Helper
  * @mixin _Sunrise_Post_Admin_Forms_Helper
  * @mixin _Sunrise_Html_Elements_Helper
+ * @mixin _Sunrise_Objects_Helper
  */
 class Sunrise extends Sunrise_Base {
 
@@ -66,6 +67,7 @@ class Sunrise extends Sunrise_Base {
     require( __DIR__ . '/features/class-message-feature.php' );
     require( __DIR__ . '/features/class-infobox-feature.php' );
 
+    require( __DIR__ . '/helpers/class-objects-helper.php' );
     require( __DIR__ . '/helpers/class-posts-helper.php' );
     require( __DIR__ . '/helpers/class-forms-helper.php' );
     require( __DIR__ . '/helpers/class-fields-helper.php' );
