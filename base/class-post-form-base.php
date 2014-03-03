@@ -77,7 +77,7 @@ class Sunrise_Post_Form_Base extends Sunrise_Form_Base {
    * @return string
    */
   function form_html() {
-    $html = array( '<div id="post-admin-form-' . $this->form_name . '" class="post-admin-form">' );
+    $html = array( '<div id="post-admin-form-' . $this->form_name . '" ' . $this->get_class . '>' );
     /**
      * @var Sunrise_Field_Base $field
      */

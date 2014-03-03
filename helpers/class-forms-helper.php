@@ -113,6 +113,10 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
    * @return int
    */
   static function register_form( $object_type, $args = array() ) {
+  	$defaults = array(
+  		'classes' => array( 'post-admin-form' )
+  	);
+  	$args = array_merge( $defaults, $args );
     $args['object_type'] = $object_type;
     $args['form_index'] = count( self::$_forms['index'] );
     $args['fields'] = array();
