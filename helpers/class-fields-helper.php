@@ -16,7 +16,7 @@ class _Sunrise_Fields_Helper {
   /**
    * @var array
    */
-  private static $_multiuse_fields = array( 'index' => array() );
+  private static $_multiform_fields = array( 'index' => array() );
 
   /**
    * @var array
@@ -76,7 +76,7 @@ class _Sunrise_Fields_Helper {
    * @return int
    */
   static function add_form_field( $field_name ) {
-    $field_index = self::$_multiuse_fields['index'][strtolower( $field_name )];
+    $field_index = self::$_multiform_fields['index'][strtolower( $field_name )];
     Sunrise::_index_field( $field_name, $field_index );
     return $field_index;
   }
@@ -95,18 +95,18 @@ class _Sunrise_Fields_Helper {
   /**
    * @param $field_name
    * @param array $field_args
-   * @param bool $multiuse Will (typically) be true if called directly, false if called from self::register_form_field().
+   * @param bool $multiform Will (typically) be true if called directly, false if called from self::register_form_field().
    * @return int
    */
-  static function register_field( $field_name, $field_args = array(), $multiuse = true ) {
+  static function register_field( $field_name, $field_args = array(), $multiform = true ) {
     $args['field_name'] = strtolower( $field_name );
     $args['field_index'] = count( self::$_fields['index'] );
     self::$_fields['index'][$args['field_index']] = $field_args;
-    if ( $multiuse ) {
+    if ( $multiform ) {
       /**
-       * Create an index of multiuse fields
+       * Create an index of multiform fields
        */
-      self::$_multiuse_fields['index'][$name] = $args['field_index'];
+      self::$_multiform_fields['index'][$name] = $args['field_index'];
     }
     return $args['field_index'];
   }

@@ -107,11 +107,11 @@ Sunrise is designed to be as simple as possible to use yet still provide headroo
 **@todo...**
 ###Registering a Field to a Form
 **@todo...**
-###Registering a Multiuse Field
+###Registering a Multiform Field
 **@todo...**
-###Adding a Multiuse Field to a Form
+###Adding a Multiform Field to a Form
 **@todo...**
-###Registering and Adding Multiuse Fields
+###Registering and Adding Multiform Fields
 **@todo...**
 ###Registering and Using Field Prototypes
 **@todo...**
@@ -132,8 +132,8 @@ Method Name|Description
 -----------|-----------
 `register_form()`|Registers a Form which is a container of fields. Forms are uniquely identified by their Object Type, Form Context and Form Name. [See reference. **@todo...**]()
 `register_form_field()`|Registers a Field for the most recently registered Form.  [See reference. **@todo...**]()
-`register_field()`|Registers a Multiuse Field that can be added to multiple forms using the `add_form_field()` method. [See reference. **@todo...**]()
-`add_form_field()`|Adds a previously registered Multiuse Field to the most recently registered Form.  [See reference. **@todo...**]()
+`register_field()`|Registers a Multiform Field that can be added to multiple forms using the `add_form_field()` method. [See reference. **@todo...**]()
+`add_form_field()`|Adds a previously registered Multiform Field to the most recently registered Form.  [See reference. **@todo...**]()
 
 ###The $args Pattern
 Sunrise makes heavy use of what we call _"The $args Pattern"_. This pattern can be found in use in many aspects of the WordPress core code but by no means in all areas of WordPress core where it could be used.
@@ -176,7 +176,7 @@ Unlike `register_post_type()` and `register_taxonomy()` the methods for register
 **@more...**
 
 ###Uniquely Identifying Forms
-Unlike Fields which can be uniquely identified with either their `field_name`, if they are Multiuse Fields, or by a Form and their `field_name` Forms do not have a single unique identifier other than the `form_index` assigned at the time the Form is registered. 
+Unlike Fields which can be uniquely identified with either their `field_name`, if they are Multiform Fields, or by a Form and their `field_name` Forms do not have a single unique identifier other than the `form_index` assigned at the time the Form is registered. 
 
 The `register_form()` method returns the registered `form_index` property which can be passed to `register_form_field()` if needed to override the Current Form
 
@@ -323,7 +323,7 @@ Sunrise takes great pains to name aspects of its architecture and to be very con
         
 	- Note that using the `add_static_action()` method enforces an underscore prefix on methods to indicate the method should be considered _non-public_ for external users of the class. For more on Static Actions and Filters such as how to handle priorities other than 10 and how to change the hook name [see details]().
 
-- **Multiuse Field** - Fields in Sunrise are either specific to a Form or they are Multiuse Fields meaning they can be added to multiple forms by name. To register a Multiuse Field use `Sunrise::register_field()` method vs. the `Sunrise::register_form_field()` method, the latter of which registers the Field and associates it exclusively with the most recently registered Form.
+- **Multiform Field** - Fields in Sunrise are either specific to a Form or they are Multiform Fields meaning they can be added to multiple forms by name. To register a Multiform Field use `Sunrise::register_field()` method vs. the `Sunrise::register_form_field()` method, the latter of which registers the Field and associates it exclusively with the most recently registered Form.
 
 - **Helper Classes and Methods** - Helper Classes are classes with only `static` methods designed to contribute their methods to the `Sunrise` class to enable the streamlined API of Sunrise. Within Sunrise all helper classes are found in the `/helper/` subdirectory and are named with a leading underscore to indicate they are not designed to be referenced by name directly outside of the class file itself. To add a helper class you simple register it with `Sunrise::register_helper( $class_name );` and then all it's `static` methods can be called via the `Sunrise` class. However, if you do this be sure [to prefix your method names](http://nacin.com/2010/05/11/in-wordpress-prefix-everything/) with your plugin's or theme's own unique prefix. 
 
