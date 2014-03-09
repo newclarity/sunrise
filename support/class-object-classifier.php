@@ -75,9 +75,6 @@ class Sunrise_Object_Classifier {
       if ( $this->subtype ) {
         $this->subtype = sanitize_key( $this->subtype );
       }
-      if ( 'post' == $this->object_type && ! post_type_exists( $this->subtype ) ) {
-        $this->subtype = false;
-      }
     }
   }
 

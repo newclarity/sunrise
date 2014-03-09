@@ -98,7 +98,7 @@ abstract class Sunrise_Base {
    *
    * @return array
    */
-  function get_var_prefix() {
+  function var_prefix() {
     return constant( get_class( $this ) . '::VAR_PREFIX' );
   }
 
@@ -111,7 +111,7 @@ abstract class Sunrise_Base {
    *
    * @return array
    */
-  function get_no_prefix() {
+  function no_prefix() {
     return constant( get_class( $this ) . '::NO_PREFIX' );
   }
 
@@ -121,8 +121,8 @@ abstract class Sunrise_Base {
    * @param array $args An array of name/value pairs that can be used to initialize an object's properties.
    */
   function assign( $args ) {
-    if ( false !== ( $var_prefix = $this->get_var_prefix() ) ) {
-      $no_prefix = $this->get_no_prefix();
+    if ( false !== ( $var_prefix = $this->var_prefix() ) ) {
+      $no_prefix = $this->no_prefix();
       foreach( $args as $name => $value ) {
         if ( false === strpos( $name, '_' ) && ! preg_match( "#^({$no_prefix})$#", $name ) ) {
           $args["{$var_prefix}{$name}"] = $value;

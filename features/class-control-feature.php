@@ -14,7 +14,7 @@ class Sunrise_Control_Feature extends Sunrise_Feature_Base {
       'html_id' => "{$field->html_id}-field-control",
       'html_class' => "field-control",
     );
-    return Sunrise::get_element_html( 'div', $attributes, $field->element_html() );
+    return Sunrise::element_html( 'div', $attributes, $field->element_html() );
   }
 
 }

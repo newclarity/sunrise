@@ -14,7 +14,7 @@ class Sunrise_Label_Feature extends Sunrise_Feature_Base
     if ( $field->no_label ) {
       $html = false;
     } else {
-      $html = Sunrise::get_element_html( 'div', "html_for={$field->html_name}", "{$field->field_label}:" );
+      $html = Sunrise::element_html( 'div', "html_for={$field->html_name}", "{$field->field_label}:" );
     }
     return $html;
   }

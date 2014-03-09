@@ -20,7 +20,7 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
     if ( Sunrise::is_post_edit_screen() ) {
       self::add_static_action( 'add_meta_boxes' );
       self::add_static_action( 'edit_form_after_title' );
-      self::add_static_action( 'save_post_' . Sunrise::get_screen()->post_type, 'save_post', 3 );
+      self::add_static_action( 'save_post_' . Sunrise::screen()->post_type, 'save_post' );
     }
   }
 
@@ -29,7 +29,7 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
    * @param WP_Post $post
    * @param bool $update
    */
-  static function _save_post_3( $post_id, $post, $update ) {
+  static function _save_post( $post_id, $post, $update ) {
     $forms = self:: get_post_admin_forms( $post->post_type );
     if ( count( $forms ) && isset( $_POST['sunrise_fields'] ) && is_array( $POST_fields = $_POST['sunrise_fields'] ) ) {
       /**
@@ -62,7 +62,7 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
    * @param string $form_name
    * @return Sunrise_Form_Base
    */
-  static function get_post_admin_form( $post_type, $form_name ) {
+  static function post_admin_form( $post_type, $form_name ) {
     $forms = Sunrise::get_forms( "form_context=admin&form_name={$form_name}&object_type=post/{$post_type}" );
     return count( $forms ) ? $forms[0] : false;
   }
@@ -76,7 +76,7 @@ class _Sunrise_Post_Admin_Forms_Helper extends Sunrise_Form_Base {
     /**
      * @var Sunrise_Post_Admin_Form $form
      */
-    if ( $form = Sunrise::get_post_admin_form( $post->post_type, 'main' ) ) {
+    if ( $form = Sunrise::post_admin_form( $post->post_type, 'main' ) ) {
       $form->object_id = (int)$post->ID;
       $form->the_form();
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Sunrise
+ * Plugin Name: Sunrise Forms and Fields
  * Plugin URI: http://github.com/newclarity/sunrise
  * Description: Forms and Fields for WordPress
  * Version: 2.0-alpha
@@ -194,7 +194,7 @@ class Sunrise extends Sunrise_Base {
    *
    * @return WP_Screen
    */
-  static function get_screen() {
+  static function screen() {
     $screen = get_current_screen();
     if ( empty( $screen ) ) {
       global $hook_suffix, $page_hook, $plugin_page, $pagenow, $current_screen;

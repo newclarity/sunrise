@@ -33,7 +33,7 @@ class Sunrise_Form_Base extends Sunrise_Base {
   /**
    * @var string
    */
-  var $form_label;
+  var $form_title;
 
   /**
    * @var bool

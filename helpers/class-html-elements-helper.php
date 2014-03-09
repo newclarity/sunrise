@@ -23,19 +23,19 @@ class _Sunrise_Html_Elements_Helper {
    * @param mixed $value
    * @return Sunrise_Html_Element
    */
-  static function get_element_html( $tag_name, $attributes, $value ) {
-    $html_element = self::get_html_element( $tag_name, $attributes, $value, true );
+  static function element_html( $tag_name, $attributes, $value ) {
+    $html_element = self::html_element( $tag_name, $attributes, $value, true );
     return $html_element->element_html();
   }
 
   /**
    * @param string $tag_name
    * @param array $attributes
-   * @param mixed $value
+   * @param null,mixed $value
    * @param bool $reuse
    * @return Sunrise_Html_Element
    */
-  static function get_html_element( $tag_name, $attributes, $value, $reuse = false ) {
+  static function html_element( $tag_name, $attributes = array(), $value = null, $reuse = false ) {
     if ( ! $reuse ) {
       $element = new Sunrise_Html_Element( $tag_name, $attributes, $value );
     } else {

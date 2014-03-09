@@ -60,8 +60,12 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
         }
       }
       $keyed = self::$_forms['keyed'];
-      $key = implode( '&', $key );
-      $forms = count( $key ) && isset( $keyed[$key] ) ? $keyed[$key] : array();
+      if ( 0 == count( $key ) ) {
+        $forms = array();
+      } else {
+        $key = implode( '&', $key );
+        $forms = isset( $keyed[$key] ) ? $keyed[$key] : array();
+      }
     }
     return $forms;
   }
@@ -86,6 +90,7 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
    */
   static function get_form_fields( $query_args = array() ) {
     $value = false;
+    $object_id = isset( $query_args['object_id'] ) ? $query_args['object_id'] : false;
     $query_args = self::ensure_form_query_args( $query_args );
     $forms = Sunrise::get_forms( $query_args );
     $fields = array();
@@ -93,6 +98,7 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
      * @var Sunrise_Form_Base $form
      */
     foreach( $forms as $index => $form ) {
+      $form->object_id = $object_id;
       $fields = array_merge( $form->get_fields(), $fields );
     }
     return $fields;
@@ -191,7 +197,7 @@ class _Sunrise_Forms_Helper extends Sunrise_Base {
    *
    * @return bool|string Mode or false if not on a data entry page.
    */
-  static function get_form_mode() {
+  static function form_mode() {
     if ( ! self::$_form_mode ) {
       global $pagenow;
       if ( 'post-new.php' == $pagenow )
