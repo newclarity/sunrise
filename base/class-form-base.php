@@ -93,6 +93,19 @@ class Sunrise_Form_Base extends Sunrise_Base {
     $this->_object_type = $object_type;
   }
 
+  /**
+   * Retrieve the classes for the form element as an array and return as html
+   *
+   * @return string
+   */
+   function get_class() {
+	   foreach( $this->extra['form_classes'] as $class ) {
+		   $classes[] = esc_attr( $class );
+	   }
+	   // Separates classes with a single space, collates classes for form element
+	   return 'class="' . join( ' ', $classes ) . '"';
+  }
+
   function get_fields() {
     foreach( $this->_fields as $field_name => $field ) {
       if ( is_numeric( $field_name ) ) {
