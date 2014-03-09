@@ -20,7 +20,7 @@ More specifically, **Sunrise was designed for** use by development teams within 
 
 ##IMPORTANT!
 - Sunrise **is currently alpha-level software** and thus it's **API will change** before it is released as Sunrise v2.0 _(Don't say we didn't warn you!)_
-- Many of **the glossary terms are tenative**; if you have ideas for better terms then **please propose your suggestions** using the GitHub issue tracker.
+- Many of **the glossary terms are tentative**; if you have ideas for better terms then **please propose your suggestions** using the GitHub issue tracker.
 
 ##Background
 For those who care about this pre-history of Sunrise read on. Otherwise, jump to the [**QuickStart**](#quickstart).
@@ -183,7 +183,7 @@ The `register_form()` method returns the registered `form_index` property which 
 **examples...**
 
 ###Naming 
-Consistent and rigourous naming is a critical part of the Sunrise architecture. In many  but not all cases the naming drives functionality so that in those cases the naming conventions must be used consistently in order for code to work correctly.
+Consistent and rigorous naming is a critical part of the Sunrise architecture. In many  but not all cases the naming drives functionality so that in those cases the naming conventions must be used consistently in order for code to work correctly.
 
 **@more...**
 
@@ -254,7 +254,7 @@ Basically we could have used WordPress filters instead of Class Constants but in
 **@todo...**
 
 ###Target Platforms
-- Sunrise is currently designed to **target HTML5** without loosing too much functionality in HTML4, 
+- Sunrise is currently designed to **target HTML5** without losing too much functionality in HTML4,
 - Sunrise **requires PHP 5.3** or later because it uses `get_called_class()` to provide Helper Classes and Methods. Note that this is not critical to the architecture but would require a build step using Grunt or similar given the current source file structure and layout.
 
 ##Class Reference
@@ -359,5 +359,3 @@ The `WPAlchemy_MetaBox` PHP class **@todo...**
 **@todo...**
 ###[Admin Page Framework](http://wordpress.org/plugins/admin-page-framework/)
 **@todo...**
-
-
