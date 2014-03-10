@@ -47,6 +47,7 @@ abstract class Sunrise_Base {
    *
    * Intended to be used by subclasses.
    *
+   * @param array $args
    * @return array
    */
   function default_args( $args = array() ) {
