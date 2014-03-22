@@ -82,12 +82,19 @@ class _Sunrise_Fields_Helper {
   }
 
   /**
-   * @param $field_name
+   * @param string $field_name
+   * @param bool|int|string|array $form_index_or_field_args
    * @param bool|array $field_args
    * @return int
    */
-  static function register_form_field( $field_name, $field_args = array() ) {
-    Sunrise::_index_field( $field_name, count( self::$_fields['index'] ) );
+  static function register_form_field( $field_name, $form_index_or_field_args = false, $field_args = array() ) {
+    if ( is_numeric( $form_index_or_field_args ) ) {
+      $form_index = $form_index_or_field_args;
+    } else {
+      $form_index = count( self::$_fields['index'] );
+      $field_args = $form_index_or_field_args;
+    }
+    Sunrise::_index_field( $field_name, $form_index );
     $field_name = strtolower( $field_name );
     return self::register_field( $field_name, $field_args, false );
   }
