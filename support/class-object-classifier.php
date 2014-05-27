@@ -3,7 +3,7 @@
 /**
  * Class Sunrise_Object_Classifier
  */
-class Sunrise_Object_Classifier {
+final class Sunrise_Object_Classifier {
   /**
    * @var bool
    */
@@ -85,6 +85,28 @@ class Sunrise_Object_Classifier {
    */
   function unqualified_type() {
     return empty( $this->subtype ) ? $this->object_type : $this->subtype;
+  }
+
+  /**
+   * Check if the current object classifier is valid.
+   *
+   * @return bool
+   */
+  public function is_valid() {
+    return ! empty( $this->type );
+  }
+
+  /**
+   * Check if the current object classifier is equivalent to the one passed in.
+   *
+   * @param Sunrise_Object_Classifier $that
+   * @return bool
+   */
+  public function is_equivalent( $that ) {
+    if ( ! is_a( $that, __CLASS__ ) ) {
+      $object_type = new self( $that );
+    }
+    return $this == $that;
   }
 
   /**

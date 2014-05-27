@@ -90,11 +90,11 @@ class Sunrise extends Sunrise_Base {
      * @todo Evaluate if priority 10 is okay or priority 0 is needed for these 'admin_*' hooks.
      */
     if ( defined( 'DOING_AJAX' ) ) {
-      self::add_static_action( 'admin_init', 'wp_loaded' );
+      self::add_static_action( 'admin_init', '_wp_loaded' );
     } else if ( is_admin() ) {
-      self::add_static_action( 'admin_menu', 'wp_loaded' );
+      self::add_static_action( 'admin_menu', '_wp_loaded' );
     } else {
-      self::add_static_action( 'wp_loaded' );
+      self::add_static_action( '_wp_loaded' );
     }
 
   }
