@@ -2,6 +2,9 @@
 
 Forms & Fields for Post Types in the WordPress Admin
 
+**NOTE:** This is **a DEAD project** that never really got off the ground.  Its planned features will eventually be added to <a href="http://github.org/wplib">WPLib</a>.
+
+
 ##CONTENTS
 - [Who is Sunrise For?](#who-is-sunrise-for)
 - [IMPORTANT!](#important)
