@@ -1,3 +1,7 @@
+#DEPRECATION NOTICE
+
+Sunrise has been deprecated in favor of [WPLib](http://github.com/wplib/wplib/).
+
 #Sunrise
 
 Forms & Fields for Post Types in the WordPress Admin
